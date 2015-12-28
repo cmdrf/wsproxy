@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2015, Fabian Herb
 All rights reserved.
 
@@ -21,4 +22,28 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
+#include "PidFile.h"
+#include <sys/types.h>
+#include <unistd.h>
+#include <fstream>
+#include <stdexcept>
+
+PidFile::PidFile(const std::string filename) :
+	mFilename(filename)
+{
+	if(!filename.empty())
+	{
+		std::ofstream file(filename);
+		if(!file.good())
+			throw std::runtime_error("Could not open " + filename);
+		file << getpid() << std::endl;
+	}
+}
+
+PidFile::~PidFile()
+{
+	if(!mFilename.empty())
+		unlink(mFilename.c_str());
+}
