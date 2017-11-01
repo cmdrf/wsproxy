@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Fabian Herb
+Copyright (c) 2015-2017, Fabian Herb
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -38,10 +38,10 @@ using boost::asio::ip::tcp;
 
 typedef websocketpp::server<websocketpp::config::asio> Server;
 
-std::map<connection_hdl, std::shared_ptr<LineBasedConnection>, std::owner_less<connection_hdl>> connections;
-boost::asio::io_service ioService;
-tcp::resolver::iterator resolverIterator;
-Server server;
+static std::map<connection_hdl, std::shared_ptr<LineBasedConnection>, std::owner_less<connection_hdl>> connections;
+static boost::asio::io_service ioService;
+static tcp::resolver::iterator resolverIterator;
+static Server server;
 
 /// Response handler for the line based connection
 /** To be passed to the constructor of LineBasedConnection. */
