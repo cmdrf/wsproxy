@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(wsproxy)
 
 set(WS_PROXY_SOURCES
@@ -23,7 +23,8 @@ include(ExternalProject)
 set(DEPENDENCIES_PREFIX ${CMAKE_BINARY_DIR}/dependencies)
 ExternalProject_Add(websocketpp
 	PREFIX ${CMAKE_BINARY_DIR}/websocketpp
-	URL http://github.com/zaphoyd/websocketpp/archive/7f19b6ea95e7dbeaf8368cbba10c7fde1f51f01f.zip
+	URL https://github.com/zaphoyd/websocketpp/archive/0.7.0.tar.gz
+	URL_MD5 5027c20cde76fdaef83a74acfcf98e23
 	CMAKE_ARGS
 		-DCMAKE_INSTALL_PREFIX:PATH=${DEPENDENCIES_PREFIX}
 		-DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE_ABS}
